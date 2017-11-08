@@ -5,6 +5,9 @@ import marked from 'marked';
 import { Glyphicon, GlyphButton } from '../ItemControls';
 import { addBlock, editBlock, deleteBlock, moveBlock, followBlock, publishBlock } from '../../actions/blockActions';
 
+// sanitize html input
+marked.setOptions({ sanitize: true });
+
 // glyphicon buttons visible on hover
 @connect(store => store)
 class BlockControl extends React.Component {

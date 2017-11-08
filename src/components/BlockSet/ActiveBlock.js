@@ -3,6 +3,9 @@ import { ReactDOM, findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import marked from 'marked';
 
+// sanitize html input
+marked.setOptions({ sanitize: true });
+
 // active block renders MarkdownBlock/Editor combination
 @connect(store => store)
 export default class ActiveBlock extends React.Component {

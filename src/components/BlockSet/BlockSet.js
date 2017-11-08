@@ -1,13 +1,9 @@
 import React from 'react';
 import { ReactDOM, findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
-import marked from 'marked';
 import { Glyphicon, GlyphButton } from '../ItemControls';
 import ActiveBlock from './ActiveBlock';
 import MarkdownBlock from './MarkdownBlock';
-
-// sanitize html input
-marked.setOptions({ sanitize: true });
 
 
 // ActiveBlock || MarkdownBlock
