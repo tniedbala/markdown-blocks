@@ -7,8 +7,7 @@ Create a simple markdown editor with the intention of learning React/Redux. Curr
 ### Preview
 Current project status:
 
-
-<img src="screenshot/preview.gif" alt="preview.gif" style="max-width: 100%; border: 1px solid #000000"/>
+<img src="screenshot/preview.gif" alt="preview.gif" style="max-width: 100%; border: 1px solid #000000;" />
 
 
 ### Installation & Setup
