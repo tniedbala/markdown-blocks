@@ -7,8 +7,9 @@ Create a simple markdown editor with the intention of learning React/Redux. Curr
 ### Preview
 Current project status:
 
-<img src="screenshot/preview.gif" alt="preview.gif" style="max-width: 100%; border: 1px solid black;" />
-
+<kbd>
+  <img src="screenshot/preview.gif" alt="preview.gif" style="max-width: 100%; border: 1px solid black;" />
+</kbd>
 
 ### Installation & Setup
 After downloading navigate to the project directory from the command line and install project dependencies using ```npm install```:
