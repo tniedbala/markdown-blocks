@@ -1,5 +1,16 @@
 import { pullAt } from 'lodash';
 
+// delete block.follow
+function deleteFollow(newState) {
+  return newState.map(block => {
+    if(block.follow) {
+      delete block.follow;
+    }
+    return block;
+  });
+}
+
+// default state
 const blockset =  [
   {
     id: Date.now(),
@@ -23,8 +34,9 @@ const blockset =  [
   }
 ]
 
+
 export default function reducer(state=blockset, action) {
-  var newState = [...state],
+  var newState = [ ...state],
       i = newState.findIndex(obj => obj.id === action.id), // block index
       a = newState.findIndex(obj => obj.id === 'active'); // active block index
   
@@ -35,14 +47,17 @@ export default function reducer(state=blockset, action) {
       return newState;
     }
 
-    case 'EDIT_BLOCK': {      
+    case 'EDIT_BLOCK': {
       // adjust block index prior to removing active block (if needed)
-      i = a > i ? i : i--; 
+      i = a > i ? i : i - 1; 
       newState.splice(a, 1);
 
       // promote selected block to active block
-      newState[i].id = 'active';
-      newState[i].follow = true;
+      newState = deleteFollow(newState);
+      newState[i] = {
+        id: 'active',
+        follow: true
+      }
       return newState;
     }
 
@@ -71,25 +86,19 @@ export default function reducer(state=blockset, action) {
     }
 
     case 'FOLLOW_BLOCK': {
-      // remove block.follow from previous block & add to target
-      newState = newState.map((block) => {
-        if(block.follow) {
-          delete block.follow;
-        }
-        return block;
-      });
-      newState[i].follow = true;     
+      newState = deleteFollow(newState);
+      newState[i].follow = true;
       return newState;
     }
 
     case 'PUBLISH_BLOCK': {
       newState[a] = {
         id: Date.now(),
-        content: action.content
+        content: action.content,
+        follow: true
       }
       newState.splice(++a, 0, {
-        id: 'active',
-        follow: true
+        id: 'active'
       });
       return newState;
     }

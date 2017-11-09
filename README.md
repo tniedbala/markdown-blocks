@@ -2,7 +2,7 @@
 User-friendly markdown editor build with React.
 
 ### Objective
-Create a simple markdown editor with the intention of learning React/Redux. Currently a work-in-progress (see [todo.md](todo.md)).
+Create a simple markdown editor with the intention of learning React/Redux. Currently a work-in-progress (see [TODO.md](TODO.md)).
 
 ### Installation & Setup
 After downloading navigate to the project directory from the command line and install project dependencies using ```npm install```:
@@ -43,7 +43,7 @@ MarkdownBlocks uses a combination of [React](https://reactjs.org/), [Redux](http
 | [react-ace](https://github.com/securingsincity/react-ace) | Ace React component             |
 | [Bootstrap](https://getbootstrap.com/docs/3.3/)       	| Base components/style             |
 
-Up-to-date version of Node.js required. See [package.json]() for a complete list of dependencies.
+Up-to-date version of Node.js required. See [package.json](package.json) for a complete list of dependencies.
 
 ### License
-[MIT](license)
+[MIT](LICENSE)

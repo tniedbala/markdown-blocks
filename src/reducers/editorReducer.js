@@ -18,7 +18,8 @@ export default function reducer(state=editor, action) {
       return newState;
 
     case 'EDIT_BLOCK':
-      newState.cache = newState.content = action.content;
+      newState.content = action.content;
+      newState.cache = newState.content;
       return newState;
 
     case 'PUBLISH_BLOCK':

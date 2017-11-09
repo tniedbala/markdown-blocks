@@ -85,7 +85,7 @@ class Nav extends React.Component {
         <nav className="navbar navbar-inverse navbar-fixed-top">
           <div className="container" >
             <div id="navbar" className="navbar-collapse">
-              <a className="navbar-brand" href="#">Markdown Editor</a>
+              <a className="navbar-brand" href="#">Markdown Blocks</a>
               <Menu menuOptions={this.menuOptions} downloadOptions={this.downloadOptions} />
               <EditToggle editmode={this.props.layout.editmode} handleChange={this.toggleEditMode} />
             </div>
