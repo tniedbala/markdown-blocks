@@ -4,6 +4,12 @@ User-friendly markdown editor build with React.
 ### Objective
 Create a simple markdown editor with the intention of learning React/Redux. Currently a work-in-progress (see [TODO.md](TODO.md)).
 
+### Preview
+Current project status:
+
+
+![preview.gif](screenshot/preview.gif)
+
 ### Installation & Setup
 After downloading navigate to the project directory from the command line and install project dependencies using ```npm install```:
 
