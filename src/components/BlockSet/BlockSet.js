@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Glyphicon, GlyphButton } from '../ItemControls';
 import ActiveBlock from './ActiveBlock';
 import MarkdownBlock from './MarkdownBlock';
+import { followBlock } from '../../actions/blockActions';
 
 
 // ActiveBlock || MarkdownBlock
@@ -24,7 +25,7 @@ export default class BlockSet extends React.Component {
   }
 
   // scroll to block.follow on update
-  componentDidUpdate() {
+  componentDidUpdate() {   
     if(this.follow) {
       this.follow.scrollIntoView({
         block: 'start',

@@ -74,7 +74,6 @@ export default function reducer(state=blockset, action) {
       if (!action.moveUp && i === newState.length - 1) {
         return newState;
       }
-      
       // set target index & swap target blocks
       let j = action.moveUp ? i - 1 : i + 1,
           pull = [i, j].sort(),
@@ -112,6 +111,11 @@ export default function reducer(state=blockset, action) {
         id: 'active',
         follow: true
       });
+      return newState;
+    }
+
+    case 'TOGGLE_EDITMODE': {
+      newState = deleteFollow(newState);
       return newState;
     }
 

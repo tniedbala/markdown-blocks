@@ -18,6 +18,7 @@ export default function reducer(state=layout, action) {
       return newState;
 
     case 'TOGGLE_EDITMODE':
+      //alert('test');
       newState.editmode = !state.editmode;
       return newState;
 

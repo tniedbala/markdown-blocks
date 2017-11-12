@@ -17,7 +17,7 @@
 - Add setting to toggle text selection in rendered markdown (currently prevents default cursor selection to improve edit on block double-click)
 
 #### Editor Controls
-- Add expand/collapse functionality
+- Add expand button, consider adding fixed footer
 - Add keyboard shortcut for publish command
 
 #### Styling

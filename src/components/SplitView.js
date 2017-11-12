@@ -48,19 +48,21 @@ export default class SplitView extends React.Component {
 
   render() {
     // set height dimensions
-    const split = this.props.layout.split,
-          lowerHeight = split.height * split.ratio,
-          upperHeight = split.height - lowerHeight;
+    const { layout } = this.props,
+          { editmode, collapse, split } = layout,
+          lowerHeight = editmode && !collapse ? split.height * split.ratio : 0,
+          upperHeight = editmode && !collapse ? split.height - lowerHeight : split.height - 50,
+          transition = editmode && !collapse ? '0s' : '1s';
 
     return (
       <div style={{ marginTop: this.props.marginTop }}>
         <div id="split-pane" ref={splitPane => this.splitPane = splitPane}>
           <div id="top-pane" style={{ height: upperHeight }}>        
-            { this.props.children[0] }            
+            { this.props.children[0] }      
           </div>
-          <div 
+          <div
             id="bottom-pane"
-            style={{ height: lowerHeight }}
+            style={{ transition, height: lowerHeight }}
             ref={bottomPane => this.bottomPane = bottomPane}
           >
             <hr 
