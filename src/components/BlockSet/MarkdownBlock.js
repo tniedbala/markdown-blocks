@@ -104,7 +104,7 @@ export default class MarkdownBlock extends React.Component {
   render() {  
     return (
       <div
-        className="row component markdown-block"
+        className="row markdown-block"
         title="Double-click to edit"
         style={{cursor: 'default'}}
         onMouseDown={event => event.preventDefault()}
@@ -120,7 +120,7 @@ export default class MarkdownBlock extends React.Component {
         />         
         <div 
           ref={block => this.block = block}
-          className="container snippet-content bottom-pad" 
+          className="container block-content" 
           dangerouslySetInnerHTML={{ __html: marked(this.props.block.content) }} 
         /> 
         <hr className="divider-gradient" style={this.state} />
