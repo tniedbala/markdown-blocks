@@ -58,16 +58,22 @@ export default class SplitView extends React.Component {
           lowerHeight = edit ? split.height * split.ratio : 0,
           upperHeight = edit ? split.height - lowerHeight : split.height - 60,
           transition = edit ? '0s' : '1s';
+    
+    const lower = Math.round(split.ratio * 1000),
+          upper = Math.round(1000 - lower),
+          lowerStyle = { 
+            flex: edit ? lower : 0,
+            transition: edit ? '0s' : '0.6s'
+          }
 
     return (
-
         <div id="split-pane" ref={splitPane => this.splitPane = splitPane}>
-          <div id="top-pane" style={{ height: upperHeight }}>  
+          <div id="top-pane" style={{ flex: upper }}>  
             { this.props.children[0] }
           </div>
           <div
             id="bottom-pane"
-            style={{ transition, height: lowerHeight }}
+            style={ lowerStyle }
             ref={bottomPane => this.bottomPane = bottomPane}
           >
             <hr 
@@ -78,7 +84,6 @@ export default class SplitView extends React.Component {
             { this.props.children[1] }
           </div>
         </div>
-
     );
   }
 }

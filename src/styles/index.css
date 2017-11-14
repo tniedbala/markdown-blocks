@@ -1,7 +1,7 @@
 /* ---------------------------------- */
 /* keep top-nav from overlapping body content */
 body {
-  height: 100%;
+  height: 100vh;
   top: 0;
   bottom:0;
   padding-top: 50px;
@@ -179,7 +179,8 @@ hr.divider-gradient {
 /* split view */
 
 #split-pane {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   width: 100%;
   /* 50px top-nav + 60px footer */
@@ -187,8 +188,9 @@ hr.divider-gradient {
 }
 
 #top-pane {
-  display: block;
-  position: relative;
+  /* flex: 1; */
+  /* display: block; */
+  /* position: relative; */
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
@@ -196,8 +198,9 @@ hr.divider-gradient {
 }
 
 #bottom-pane {
-  display: block;
-  position: relative;
+  /* flex: 0.5; */
+  /* display: block; */
+  /* position: relative; */
   width: 100%;
   overflow: hidden;
   border-top: 1px solid #ccc;
