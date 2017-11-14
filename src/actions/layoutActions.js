@@ -6,11 +6,15 @@ export function openSettings() {
 }
 
 export function toggleEditor() {
-  return { type: 'TOGGLE_EDITOR' }
+  return { 
+    type: 'TOGGLE_EDITOR' 
+  }
 }
 
 export function toggleEditMode() {
-  return { type: 'TOGGLE_EDITMODE' }
+  return { 
+    type: 'TOGGLE_EDITMODE' 
+  }
 }
 
 export function movePartition(height, ratio) {
@@ -22,5 +26,14 @@ export function movePartition(height, ratio) {
 }
 
 export function toggleState() {
-  return { type: 'TOGGLE_STATE' }
+  return { 
+    type: 'TOGGLE_STATE' 
+  }
 } 
+
+export function toggleResize(resize) {
+  return {
+    type: 'TOGGLE_RESIZE',
+    resize
+  }
+}

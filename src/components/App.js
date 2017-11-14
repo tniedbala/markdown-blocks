@@ -6,6 +6,7 @@ import Nav from './Nav';
 import BlockSet from './BlockSet/BlockSet';
 import Editor from './Editor';
 import ExpandButton from './ExpandButton';
+import Footer from './Footer';
 import { resizeEditor, toggleEditor } from '../actions/editorActions';
 import { toggleEditMode } from '../actions/layoutActions';
 import SplitView from './SplitView';
@@ -26,7 +27,7 @@ class App extends React.Component {
           editmode={this.props.editmode} 
           toggleEditor={this.toggleEditor} 
         />
-          <SplitView marginTop={50}>
+          <SplitView>
             <BlockSet 
               id="blockContainer"
               editmode={this.props.editmode}
@@ -35,6 +36,7 @@ class App extends React.Component {
             />
             <Editor id="editorContainer" toggleEditor={this.toggleEditor} />
           </SplitView>
+          <Footer />
       </div>
     )
   }

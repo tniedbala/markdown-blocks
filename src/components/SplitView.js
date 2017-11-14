@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { movePartition } from '../actions/layoutActions';
+import { movePartition, toggleResize } from '../actions/layoutActions';
 
 
 @connect(store => store)
@@ -26,7 +26,10 @@ export default class SplitView extends React.Component {
   
   // calculate height change using change in mouse coordinates
   handleDrag = (event) => {
-    event.preventDefault();    
+    
+    this.props.dispatch(toggleResize(true));
+    event.preventDefault();
+
     let initialY = event.clientY,
         height = this.splitPane.clientHeight,
         lowerHeight = this.bottomPane.clientHeight;
@@ -40,6 +43,7 @@ export default class SplitView extends React.Component {
 
     // remove mousemove
     const handleMouseUp = () => {
+      this.props.dispatch(toggleResize(false));
       document.removeEventListener('mousemove', handleMouseMove);
     }
     document.addEventListener('mousemove', handleMouseMove);
@@ -50,15 +54,18 @@ export default class SplitView extends React.Component {
     // set height dimensions
     const { layout } = this.props,
           { editmode, collapse, split } = layout,
-          lowerHeight = editmode && !collapse ? split.height * split.ratio : 0,
-          upperHeight = editmode && !collapse ? split.height - lowerHeight : split.height - 50,
-          transition = editmode && !collapse ? '0s' : '1s';
+          edit = editmode && !collapse,
+          lowerHeight = edit ? split.height * split.ratio : 0,
+          upperHeight = edit ? split.height - lowerHeight : split.height - 60,
+          transition = edit ? '0s' : '1s';
+
+    const bodyHeight = document.body.clientHeight - 100;
 
     return (
-      <div style={{ marginTop: this.props.marginTop }}>
+      <div style={{ height: bodyHeight, marginTop: this.props.marginTop }}>
         <div id="split-pane" ref={splitPane => this.splitPane = splitPane}>
-          <div id="top-pane" style={{ height: upperHeight }}>        
-            { this.props.children[0] }      
+          <div id="top-pane" style={{ height: upperHeight }}>  
+            { this.props.children[0] }
           </div>
           <div
             id="bottom-pane"

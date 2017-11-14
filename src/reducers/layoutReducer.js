@@ -2,6 +2,7 @@ const layout = {
   editmode: true,
   collapse: false,
   split: {
+    resize: false,
     height: 0,
     ratio: 0.5
   }
@@ -9,7 +10,7 @@ const layout = {
 
 export default function reducer(state=layout, action) {  
   var newState = Object.assign({}, state);
-  var split = newState.split;
+  var { split } = newState;
   
   switch(action.type) {
 
@@ -18,12 +19,15 @@ export default function reducer(state=layout, action) {
       return newState;
 
     case 'TOGGLE_EDITMODE':
-      //alert('test');
       newState.editmode = !state.editmode;
       return newState;
 
     case 'TOGGLE_EDITOR':
       newState.collapse = !newState.collapse;
+      return newState;
+
+    case 'TOGGLE_RESIZE':
+      newState.split.resize = action.resize
       return newState;
 
     case 'OPEN_SETTINGS':

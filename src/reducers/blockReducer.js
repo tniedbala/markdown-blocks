@@ -114,7 +114,8 @@ export default function reducer(state=blockset, action) {
       return newState;
     }
 
-    case 'TOGGLE_EDITMODE': {
+    case 'TOGGLE_EDITMODE': 
+    case 'TOGGLE_RESIZE': {
       newState = deleteFollow(newState);
       return newState;
     }

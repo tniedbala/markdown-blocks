@@ -28,7 +28,7 @@ a:hover {
   float: center;
 }
 
-.fade-in {
+/* .fade-in {
   opacity: 1;
   animation: fadein 0.5s;
 }
@@ -46,7 +46,7 @@ a:hover {
 @keyframes fadeout {
   from { opacity: 1; }
   to   { opacity: 0; }
-}
+} */
 
  #editor {
   border-style: solid;
@@ -234,7 +234,7 @@ hr.divider-gradient {
     split pane */
 
 #split-pane {
-  position: fixed;
+  position: relative;
   height: 100%;
   width: 100%;
 }
@@ -245,28 +245,33 @@ hr.divider-gradient {
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
+  box-shadow: inset 0 0 10px #ccc;
 }
 
 #bottom-pane {
   display: block;
-  position: absolute;
+  position: relative;
   width: 100%;
   overflow: hidden;
-  bottom: 0;
+  border-top: 1px solid #ccc;
   background: white;
-}
-
-#bottom-pane.collapse {
-  max-height: 0;
-  transition: max-height .8s ease-in-out;
 }
 
 #partition {
   cursor: row-resize;
   margin: 0px !important;
   border: none;
-  border-top: 1px solid #eee;
-  background-color: #ddd; color: #ddd;
-  border-bottom: 1px solid #eee;
-  height: 2px;
+  background-color: white;
+  border-top: 1px solid #ccc;
+  border-bottom: 0;
+  height: 5px;
+}
+
+footer {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  bottom: 0px;
+  border-top: 1px solid #ccc;
+  background-color: white !important;
 }

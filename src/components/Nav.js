@@ -48,7 +48,10 @@ class Nav extends React.Component {
   
   toggleEditMode = () => {    
     //this.props.toggleEditor(this.props.layout.editmode);
-    this.props.dispatch(toggleEditMode());    
+    this.props.dispatch(toggleEditMode());
+    // if(this.props.editmode) {
+    //   this.props.dispatch(followBlock('active'));
+    // }
   }
   
   openFile = (event) => {
@@ -82,7 +85,7 @@ class Nav extends React.Component {
   render() {
     return(
       <div style={{marginBottom: '50px'}}>
-        <nav className="navbar navbar-inverse navbar-fixed-top">
+        <nav className="navbar navbar-inverse navbar-fixed-top" style={{marginBottom: '50px'}}>
           <div className="container" >
             <div id="navbar" className="navbar-collapse">
               <a className="navbar-brand" href="#">Markdown Blocks</a>

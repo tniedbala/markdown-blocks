@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Glyphicon, GlyphButton } from '../ItemControls';
 import ActiveBlock from './ActiveBlock';
 import MarkdownBlock from './MarkdownBlock';
-import { followBlock } from '../../actions/blockActions';
 
 
 // ActiveBlock || MarkdownBlock
@@ -25,14 +24,17 @@ export default class BlockSet extends React.Component {
   }
 
   // scroll to block.follow on update
-  componentDidUpdate() {   
-    if(this.follow) {
+  componentDidUpdate() {
+    const { layout } = this.props;
+
+    // prevent scrolling on SplitView resize (avoid jerky motions)
+    // if(!layout.split.resize && this.follow) {
       this.follow.scrollIntoView({
         block: 'start',
         inline: 'start',
         behavior: 'smooth'
       });
-    }
+    // }
   }
 
   // aggregate blocks into single markdown string
