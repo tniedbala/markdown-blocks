@@ -29,11 +29,11 @@ export default class BlockSet extends React.Component {
 
     // prevent scrolling on SplitView resize (avoid jerky motions)
     // if(!layout.split.resize && this.follow) {
-      this.follow.scrollIntoView({
-        block: 'start',
-        inline: 'start',
-        behavior: 'smooth'
-      });
+      // this.follow.scrollIntoView({
+      //   block: 'start',
+      //   inline: 'start',
+      //   behavior: 'smooth'
+      // });
     // }
   }
 
@@ -62,8 +62,7 @@ export default class BlockSet extends React.Component {
     let i = 0;
 
     return (
-      <div id={this.props.id} className="split split-vertical">
-        <div id="canvas" className="container" role="main">
+        <div id="blockset" className="container" role="main">
         <a 
           ref={scroll => this.scroll = scroll}
           href={this.props.layout.follow}
@@ -88,7 +87,6 @@ export default class BlockSet extends React.Component {
               })
             }
         </div>
-      </div>
     );
   }
 }

@@ -1,97 +1,146 @@
-/* ---------------------------------- */
-/* keep top-nav from overlapping body content */
-body {
+html, body {
   height: 100%;
+  min-height: 100%;
+  max-height: 100%;
   top: 0;
-  bottom:0;
-  padding-top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   overflow: hidden;
 }
-
-/* ---------------------------------- */
-/* misc nav */
 
 a:hover {
   cursor: pointer;
  }
 
-input[type='file'] {
-  display:none;
+.expand-float { 
+  background: none;
+  position: fixed; 
+  height: 50px;
+  width: 60px;
+  bottom: 0px; 
+  right: 0px; 
+  float: right;
+  padding-top: 10px;
 }
 
-/* ---------------------------------- */
-/* markdown blocks */
-
-#blockset:first-child {
-  margin-top: 20px;
+#expand-btn {
+  float: center;
 }
 
-#blockset:last-child {
-  margin-bottom: 20px;
+/* .fade-in {
+  opacity: 1;
+  animation: fadein 0.5s;
 }
+
+.fade-out {
+  opacity: 0;
+  animation: fadeout 0.5s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+} */
+
+ #editor {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ddd;
+  border-radius: 5px;
+ }
+
+ input[type='file'] {
+     display:none;
+ }
+
+ .block-select {
+    height: 20px;
+ }
+
+ /* ------------------------------------ */
 
 .markdown-block {
   display:block;
   border: none;
-  outline: none;
   box-shadow: none;
 }
 
 .markdown-block:hover {
-  outline: none;
   box-shadow: 0px 5px 5px 0px #eee, 0px -5px 5px 0px #eee;
   overflow: hidden;
 }
 
-#activeblock {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 10px 10px 0px #eee, 0px -10px 10px 0px #eee;
-}
-
-#activeblock-content {
-  margin-left: 15px;
-  margin-right: 15px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-#activeblock-content:empty {
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-
-/* .active {
+.active {
   outline: none;
   box-shadow: 0 0 2pt 2pt #ddd;
   border-radius: 5px;  
-} */
-
-hr.divider-gradient {
-  margin: 0;
-  border: 0;
-  height: 1px;
-  background: #333; 
-  background-image: linear-gradient(to right, #eee, #bbb, #eee);
 }
 
-/* block controls */
-
-.edit-form {
-  padding-top: 10px;
-  padding-bottom: 30px;
+.edit-selection {
+  display: block;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 2pt 2pt #ddd;
 }
 
 .edit-options {
-  padding-top: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-top: 5px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
   color:#aaa;
   cursor: pointer;
 }
 
-/* ---------------------------------- */
-/* edit slider */
+.top-pad {
+ padding-top: 15px;
+}
+
+.bottom-pad {
+  padding-bottom: 15px;
+}
+
+.left-pad {
+ margin-left: 15px;
+}
+
+.panel.panel-default {
+  margin-bottom: 0 !important;
+}
+
+.panel-heading {
+  background-color: #f5f5f5!important;
+}
+
+.form-control {
+  width:auto;
+  display:inline-block;
+}
+
+.navbar-collapse.collapse {
+  display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+  float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px !important;
+}
+
+.navbar-right {
+  float: right!important;
+}
+
+/*  ---------------------------------------------------------------
+  edit slider:      
+*/
 
 /* box around the slider */
 .edit-switch {
@@ -161,7 +210,7 @@ hr.divider-gradient {
   transform: translateX(26px);
 }
 
-/* rounded slider */
+/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
@@ -170,15 +219,24 @@ hr.divider-gradient {
   border-radius: 50%;
 }
 
-/* ---------------------------------- */
-/* split view */
+
+/* ------------------------------------ */
+
+hr.divider-gradient {
+  margin: 0px !important;
+  border: 0;
+  height: 1px;
+  background: #333; 
+  background-image: linear-gradient(to right, #eee, #bbb, #eee);
+}
+
+ /* ------------------------------------ 
+    split pane */
 
 #split-pane {
-  display: block;
-  position: absolute;
+  position: relative;
+  height: 100%;
   width: 100%;
-  /* 50px top-nav + 60px footer */
-  height: calc(100% - 110px);   
 }
 
 #top-pane {
@@ -209,11 +267,7 @@ hr.divider-gradient {
   height: 5px;
 }
 
-/* ---------------------------------- */
-/* fixed footer */
-
 footer {
-  display: block;
   position: fixed;
   height: 60px;
   width: 100%;

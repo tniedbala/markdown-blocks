@@ -84,8 +84,7 @@ class Nav extends React.Component {
 
   render() {
     return(
-      <div style={{marginBottom: '50px'}}>
-        <nav className="navbar navbar-inverse navbar-fixed-top" style={{marginBottom: '50px'}}>
+        <nav className="navbar navbar-inverse navbar-fixed-top">
           <div className="container" >
             <div id="navbar" className="navbar-collapse">
               <a className="navbar-brand" href="#">Markdown Blocks</a>
@@ -95,7 +94,6 @@ class Nav extends React.Component {
             <input ref="fileDialog" type="file" id="input" accept=".md, .json, .txt" onChange={this.openFile} />
           </div>
         </nav>
-      </div>
     );
   }
 }

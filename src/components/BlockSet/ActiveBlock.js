@@ -33,9 +33,7 @@ export default class ActiveBlock extends React.Component {
         ref={activeBlock => this.activeBlock = activeBlock}
       >
         <hr className="divider-gradient" />
-        <div className="container bottom-pad">
-          <div dangerouslySetInnerHTML={{ __html: marked(this.props.editor.content) }} />
-        </div>
+        <div id="activeblock-content" dangerouslySetInnerHTML={{ __html: marked(this.props.editor.content) }} />
         <hr className="divider-gradient" />
       </div>
     );

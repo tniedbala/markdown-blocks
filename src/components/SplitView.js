@@ -59,10 +59,8 @@ export default class SplitView extends React.Component {
           upperHeight = edit ? split.height - lowerHeight : split.height - 60,
           transition = edit ? '0s' : '1s';
 
-    const bodyHeight = document.body.clientHeight - 100;
-
     return (
-      <div style={{ height: bodyHeight, marginTop: this.props.marginTop }}>
+
         <div id="split-pane" ref={splitPane => this.splitPane = splitPane}>
           <div id="top-pane" style={{ height: upperHeight }}>  
             { this.props.children[0] }
@@ -80,7 +78,7 @@ export default class SplitView extends React.Component {
             { this.props.children[1] }
           </div>
         </div>
-      </div>
+
     );
   }
 }
