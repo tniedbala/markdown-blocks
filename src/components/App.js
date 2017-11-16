@@ -34,7 +34,7 @@ class App extends React.Component {
               blocks={this.props.blockset}
               editorContent={this.props.editor.content} 
             />
-            <Editor id="editorContainer" toggleEditor={this.toggleEditor} />
+            <Editor id="editorContainer"/> 
           </SplitView>
           <Footer />
       </div>
