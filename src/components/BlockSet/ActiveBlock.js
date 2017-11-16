@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactDOM, findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { followBlock } from '../../actions/blockActions';
+import { follow } from '../../actions/layoutActions';
 import marked from 'marked';
 
 // sanitize html input
@@ -28,7 +29,7 @@ export default class ActiveBlock extends React.Component {
   render() {
     return (
       <div 
-        id="activeblock" 
+        id="active" 
         className="row top-pad bottom-pad"
         ref={activeBlock => this.activeBlock = activeBlock}
       >

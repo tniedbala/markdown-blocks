@@ -3,13 +3,14 @@ import { ReactDOM, findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import marked from 'marked';
 import { Glyphicon, GlyphButton } from '../ItemControls';
+import { follow } from '../../actions/layoutActions';
 import { addBlock, editBlock, deleteBlock, moveBlock, followBlock, publishBlock } from '../../actions/blockActions';
 
 // sanitize html input
 marked.setOptions({ sanitize: true });
 
 // glyphicon buttons visible on hover
-@connect(store => store)
+@connect((store) => store)
 class BlockControl extends React.Component {
   constructor(props) {
     super(props);
@@ -27,8 +28,15 @@ class BlockControl extends React.Component {
 
   // up: moveUp=true; down: moveUp=false
   moveBlock = (moveUp) => {
-    this.props.dispatch(followBlock(this.props.id));
-    this.props.dispatch(moveBlock(this.props.id, moveUp));    
+    let { id, layout } = this.props;
+    this.props.dispatch(followBlock(id));
+    this.props.dispatch(moveBlock(id, moveUp));
+    this.props.dispatch(follow(id));
+    document.getElementById(id).scrollIntoView({
+      block: 'start',
+      inline: 'start',
+      behavior: 'smooth'
+    });
   }
   
   // edit on pencil icon click, double-click
@@ -37,15 +45,10 @@ class BlockControl extends React.Component {
     this.props.dispatch(editBlock(this.props.id, block.content));
   }
 
-  render() {   
+  render() {
     return(
-      <form className="form-inline edit-form top-pad" style={this.props.isVisible}>
-      {
-        this.controls.map(controls => {
-          controls.className = 'pull-right edit-options';
-          return <Glyphicon { ...controls} />
-        })
-      }
+      <form className="form-inline block-control top-pad">
+        { this.controls.map((controls) => <Glyphicon { ...controls} />) }
       </form>
     );
   }
@@ -53,30 +56,13 @@ class BlockControl extends React.Component {
 
 
 // container for rendered markdown block
-@connect(store => store)
+@connect((store) => store)
 export default class MarkdownBlock extends React.Component {
   constructor(props) { 
     super(props);
-    this.state = {
-      visibility: 'hidden'
-    }
   }
 
-  // toggle <hr/> + <BlockControl/> visibility
-  handleMouseEnter = () => {
-    if(this.props.layout.editmode) {
-      this.setState(prevState => ({
-        visibility: 'visible'
-      }));
-    }
-  }
-
-  handleMouseLeave = () => {
-    this.setState(prevState => ({
-      visibility: 'hidden'
-    }));
-  }
-
+  // #activeblock => .markdownblock
   publishBlock = () => {
     if(this.props.editor.content.trim() === '') {
       return
@@ -102,28 +88,23 @@ export default class MarkdownBlock extends React.Component {
 
   // TODO - add settings option to toggle .markdown-block cursor style & text selection
   render() {  
+    const block = this.props.block;
     return (
       <div
-        className="row markdown-block"
+        id={block.id}
+        className={'row markdown-block ' + this.focus}
         title="Double-click to edit"
         style={{cursor: 'default'}}
-        onMouseDown={event => event.preventDefault()}
+        onMouseDown={(event) => event.preventDefault()}
         onDoubleClick={this.handleDoubleClick}        
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave} 
       >
-        <hr className="divider-gradient" style={this.state} />
-        <BlockControl 
-          id={this.props.block.id}
-          controls={this.props.controls}
-          isVisible={this.state}
-        />         
+        <hr className="divider-gradient"/>
+        <BlockControl id={block.id} controls={this.props.controls} />         
         <div 
-          ref={block => this.block = block}
           className="container block-content" 
           dangerouslySetInnerHTML={{ __html: marked(this.props.block.content) }} 
         /> 
-        <hr className="divider-gradient" style={this.state} />
+        <hr className="divider-gradient"/>
       </div>
     );
   }

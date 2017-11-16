@@ -1,4 +1,5 @@
 const layout = {
+  follow: 'active',
   editmode: true,
   collapse: false,
   split: {
@@ -13,6 +14,10 @@ export default function reducer(state=layout, action) {
   var { split } = newState;
   
   switch(action.type) {
+
+    case 'FOLLOW':
+      newState.follow = action.anchor;
+      return newState;
 
     case 'TOGGLE_STATE':
       newState.showstate = !newState.showstate;

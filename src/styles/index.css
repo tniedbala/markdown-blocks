@@ -30,11 +30,32 @@ input[type='file'] {
   margin-bottom: 20px;
 }
 
+/* block controls */
+.block-control {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  visibility: hidden;
+}
+
+.block-control .glyphicon, footer .glyphicon {
+  float: right;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color:#aaa;
+  cursor: pointer;
+}
+
 .markdown-block {
   display: block;
   border: none;
   outline: none;
   box-shadow: none;
+}
+
+.markdown-block .divider-gradient {
+  visibility: hidden;
 }
 
 .markdown-block:hover {
@@ -43,18 +64,27 @@ input[type='file'] {
   overflow: hidden;
 }
 
+/* show block controls on block hover */
+.markdown-block:hover .block-control {
+  visibility: visible;
+}
+
+.markdown-block:hover .divider-gradient {
+  visibility: visible;
+}
+
 .block-content, #activeblock-content {
   padding: 20px 30px 20px 30px;
 }
 
-#activeblock {
+#active {
   margin-top: 10px;
   margin-bottom: 10px;
   /* box-shadow: 0px 10px 10px 0px #eee, 0px -10px 10px 0px #eee; */
   box-shadow: 1px 20px 20px -20px #ddd, -1px -20px 20px -20px #ddd;
 }
 
-#activeblock hr:last-of-type {
+#active hr:last-of-type {
   position: relative;
   bottom: 0;
 }
@@ -63,38 +93,12 @@ input[type='file'] {
   min-height: 150px;
 }
 
-/* #activeblock-content:empty {
-  padding-top: 40px;
-  padding-bottom: 40px;
-} */
-
-/* .active {
-  outline: none;
-  box-shadow: 0 0 2pt 2pt #ddd;
-  border-radius: 5px;  
-} */
-
 hr.divider-gradient {
   margin: 0;
   border: 0;
   height: 1px;
   background: #333; 
   background-image: linear-gradient(to right, #eee, #bbb, #eee);
-}
-
-/* block controls */
-.edit-form {
-  display: block;
-  padding-top: 10px;
-  padding-bottom: 30px;
-}
-
-.edit-options {
-  padding-top: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  color:#aaa;
-  cursor: pointer;
 }
 
 /* ---------------------------------- */

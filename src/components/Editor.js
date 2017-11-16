@@ -6,13 +6,13 @@ import 'brace/mode/markdown';
 import 'brace/theme/chrome';
 import { Glyphicon } from './ItemControls';
 import { connect } from 'react-redux';
-import { toggleEditor, toggleState } from '../actions/layoutActions';
+import { toggleEditor, toggleState, follow } from '../actions/layoutActions';
 import { editorChange, openFile, setHeight } from '../actions/editorActions';
 import { moveBlock, publishBlock, followBlock, cancelBlock } from '../actions/blockActions';
 
 
 // editor glyphicon buttons
-@connect(store => store)
+@connect((store) => store)
 class EditorHeading extends React.Component {
   constructor(props) {
     super(props);
@@ -48,25 +48,26 @@ class Editor extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  followActive = () => this.props.dispatch(follow('active'));
   setValue = (newValue) => this.refs.aceEditor.editor.setValue(newValue);
   cancelBlock = () => this.props.dispatch(cancelBlock());
   clearEditor = () => this.setValue(''); 
   editorChange = (content) => {
-    // this.props.dispatch(followBlock('active'));
     this.props.dispatch(editorChange(content));
+    this.followActive();    
   }
   
   publishBlock = () => {
     if(this.props.editor.content.trim() === '') {
       return;
     }
-    this.props.dispatch(publishBlock(this.props.editor.content));
+    this.props.dispatch(publishBlock(this.props.editor.content));    
+    this.followActive();
   }
 
-  render() {    
-    const split = this.props.layout.split;
-    const editorHeight = split.height * split.ratio - 50; // - 100; // - 165;
+  render() {
+    const split = this.props.layout.split,
+          editorHeight = split.height * split.ratio - 50; // - 100; // - 165;
     
     return ( 
       <div 

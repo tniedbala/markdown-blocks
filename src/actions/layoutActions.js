@@ -37,3 +37,10 @@ export function toggleResize(resize) {
     resize
   }
 }
+
+export function follow(anchor) {
+  return {
+    type: 'FOLLOW',
+    anchor
+  }
+}

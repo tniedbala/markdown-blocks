@@ -23,18 +23,17 @@ export default class BlockSet extends React.Component {
     super(props);
   }
 
-  // scroll to block.follow on update
+  // scroll to layout.follow on update
   componentDidUpdate() {
-    const { layout } = this.props;
-
     // prevent scrolling on SplitView resize (avoid jerky motions)
-    // if(!layout.split.resize && this.follow) {
-      // this.follow.scrollIntoView({
-      //   block: 'start',
-      //   inline: 'start',
-      //   behavior: 'smooth'
-      // });
-    // }
+    const { layout } = this.props;
+    if(!layout.split.resize && this.follow) {
+      this.follow.scrollIntoView({
+        block: 'start',
+        inline: 'start',
+        behavior: 'smooth'
+      });
+    }
   }
 
   // aggregate blocks into single markdown string
@@ -58,34 +57,30 @@ export default class BlockSet extends React.Component {
 
   render() {
     // render composite block when editmode == false
+    const { layout } = this.props;
     const blockset = this.props.layout.editmode ? this.props.blockset : this.compositeBlock();
     let i = 0;
 
-    return (
-        <div id="blockset" className="container" role="main">
-        <a 
-          ref={scroll => this.scroll = scroll}
-          href={this.props.layout.follow}
-          style={{ display: 'none' }} 
-        />
-          {
-              blockset.map(block => {                
-                // -----------------------------------------------------------------------         
-                // temporary - render app state in first block
-                if(i===0 && this.props.layout.editmode) { block.content = this.showState(); }
-                i++;
-                // -----------------------------------------------------------------------
-                if(block.follow) {
-                  return (
-                    <div ref={follow => this.follow = follow}>
-                      <Block block={block} />
-                    </div>
-                  );
-                } else {
-                  return <Block block={block} />
-                }
-              })
-            }
+    return (      
+      <div id="blockset" className="container" role="main">
+        {
+            blockset.map(block => {           
+              // -----------------------------------------------------------------------         
+              // temporary - render app state in first block
+              if(i === 0 && this.props.layout.editmode) { block.content = this.showState(); }
+              i++;
+              // -----------------------------------------------------------------------
+              if(block.id === layout.follow) {
+                return (
+                  <div ref={follow => this.follow = follow}>
+                    <Block block={block} />
+                  </div>
+                );
+              } else {
+                return <Block block={block} />
+              }
+            })
+          }
         </div>
     );
   }
