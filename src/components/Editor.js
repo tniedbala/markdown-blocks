@@ -74,7 +74,7 @@ class Editor extends React.Component {
         ref="editorPane"
         id={this.props.id}
         className={'test split split-vertical fade-' + (this.props.layout.editmode ? 'in' : 'out')}>   
-        <div className="panel panel-default" style={{ border: 'none' }}>          
+        <div className="panel panel-default" style={{ border: 'none' }}>         
           <div className="panel-body">
             <AceEditor
               ref="aceEditor"
@@ -86,10 +86,12 @@ class Editor extends React.Component {
               fontSize={16}
               wrapEnabled={true}
               focus={true}
+              highlightActiveLine={false}
               showGutter={false}
               editorProps={{$blockScrolling: true}}
               value={this.props.editor.content}  
-              onChange={this.editorChange} />
+              onChange={this.editorChange} 
+            />
           </div>
         </div>
       </div>

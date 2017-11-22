@@ -78,10 +78,16 @@ input[type='file'] {
 }
 
 #active {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  /* box-shadow: 0px 10px 10px 0px #eee, 0px -10px 10px 0px #eee; */
-  box-shadow: 1px 20px 20px -20px #ddd, -1px -20px 20px -20px #ddd;
+  margin: 20px 0px 20px 0px;
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  /* border: 1px dashed rgb(255, 213, 75); */
+  /* border-radius: 10px; */
+  /* box-shadow: 2px 5px 5px 0px #c1e1fa, -2px -5px 5px 0px #c1e1fa; */
+}
+
+#active hr {
+  background-color: #aaa;
 }
 
 #active hr:last-of-type {
@@ -195,7 +201,7 @@ hr.divider-gradient {
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  box-shadow: inset 0 0 20px #ccc;
+  box-shadow: inset 0 0 10px #ddd;
 }
 
 #bottom-pane {
@@ -208,10 +214,29 @@ hr.divider-gradient {
   cursor: row-resize;
   margin: 0px;
   border: none;
-  background-color: white;
+  background-color: #f7f7f7;
   border-top: 0.5px solid #bbb;
   border-bottom: 0.5px solid #ccc;
   height: 4px;
+}
+
+#partition::before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 5%;
+  left: 45%;
+  border-top: 2px dotted #aaa;
+  margin-top: 1px;
+}
+
+/* ---------------------------------- */
+/* ace editor */
+
+#editor {
+  background-color: #f7f7f7;
+  border: 1px solid #bbb;
+  border-radius: 5px;
 }
 
 /* ---------------------------------- */

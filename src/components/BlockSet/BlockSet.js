@@ -27,10 +27,11 @@ export default class BlockSet extends React.Component {
   componentDidUpdate() {
     // prevent scrolling on SplitView resize (avoid jerky motions)
     const { layout } = this.props;
+    
     if(!layout.split.resize && this.follow) {
       this.follow.scrollIntoView({
         block: 'start',
-        inline: 'start',
+        inline: 'nearest',
         behavior: 'smooth'
       });
     }

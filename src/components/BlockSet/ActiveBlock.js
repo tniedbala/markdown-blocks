@@ -31,11 +31,9 @@ export default class ActiveBlock extends React.Component {
       <div 
         id="active" 
         className="row top-pad bottom-pad"
-        ref={activeBlock => this.activeBlock = activeBlock}
+        ref={(activeBlock) => this.activeBlock = activeBlock}
       >
-        <hr className="divider-gradient" />
         <div id="activeblock-content" dangerouslySetInnerHTML={{ __html: marked(this.props.editor.content) }} />
-        <hr className="divider-gradient" />
       </div>
     );
   }
