@@ -17,7 +17,7 @@ const Block = (props) => {
 
 
 // container for all blocks
-@connect(store => store)
+@connect((store) => store)
 export default class BlockSet extends React.Component {
   constructor(props) {
     super(props);
@@ -58,14 +58,14 @@ export default class BlockSet extends React.Component {
 
   render() {
     // render composite block when editmode == false
-    const { layout } = this.props;
-    const blockset = this.props.layout.editmode ? this.props.blockset : this.compositeBlock();
+    const { layout, blockset } = this.props;
+    //const blockset = this.props.layout.editmode ? this.props.blockset : this.compositeBlock();
     let i = 0;
 
     return (      
       <div id="blockset" className="container" role="main">
         {
-            blockset.map(block => {           
+            blockset.map((block) => {
               // -----------------------------------------------------------------------         
               // temporary - render app state in first block
               if(i === 0 && this.props.layout.editmode) { block.content = this.showState(); }

@@ -33,8 +33,7 @@ input[type='file'] {
 /* block controls */
 .block-control {
   display: block;
-  padding-top: 10px;
-  padding-bottom: 30px;
+  padding: 10px 0px 10px 0px;
   visibility: hidden;
 }
 
@@ -77,23 +76,22 @@ input[type='file'] {
   padding: 20px 30px 20px 30px;
 }
 
+/* #activeblock-content {
+  padding: 20px 0px 20px 0px;
+} */
+
 #active {
   margin: 20px 0px 20px 0px;
-  border-top: 1px solid #bbb;
-  border-bottom: 1px solid #bbb;
-  /* border: 1px dashed rgb(255, 213, 75); */
-  /* border-radius: 10px; */
-  /* box-shadow: 2px 5px 5px 0px #c1e1fa, -2px -5px 5px 0px #c1e1fa; */
 }
 
 #active hr {
-  background-color: #aaa;
+  border-top: 1px solid #bbb;
 }
 
-#active hr:last-of-type {
+/* #active hr:last-of-type {
   position: relative;
   bottom: 0;
-}
+} */
 
 #activeblock-content {
   min-height: 150px;
@@ -105,6 +103,24 @@ hr.divider-gradient {
   height: 1px;
   background: #333; 
   background-image: linear-gradient(to right, #eee, #bbb, #eee);
+}
+
+/* ---------------------------------- */
+/* preview mode */
+
+.markdown-block.preview  {
+  box-shadow: none !important;
+}
+
+.markdown-block.preview div {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.preview form, .preview hr {
+  display: none;
 }
 
 /* ---------------------------------- */

@@ -1,8 +1,8 @@
 const layout = {
-  follow: 'active',
   editmode: true,
-  collapse: false,
+  follow: 'active',  
   split: {
+    collapse: false,
     resize: false,
     height: 0,
     ratio: 0.5
@@ -28,7 +28,7 @@ export default function reducer(state=layout, action) {
       return newState;
 
     case 'TOGGLE_EDITOR':
-      newState.collapse = !newState.collapse;
+      newState.split.collapse = !split.collapse;
       return newState;
 
     case 'TOGGLE_RESIZE':

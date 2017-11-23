@@ -82,17 +82,19 @@ export default class MarkdownBlock extends React.Component {
 
     // publish current editor content prior to changing active block
     this.publishBlock(); 
-    var i = this.props.blockset.findIndex(obj => obj.id === this.props.block.id);
+    var i = this.props.blockset.findIndex((obj) => obj.id === this.props.block.id);
     this.props.dispatch(editBlock(this.props.block.id, this.props.blockset[i].content));
   }
 
   // TODO - add settings option to toggle .markdown-block cursor style & text selection
   render() {  
-    const block = this.props.block;
+    const { block, layout }= this.props,
+          classname = 'row markdown-block' + (layout.editmode ? '' : ' preview');
+    
     return (
       <div
         id={block.id}
-        className={'row markdown-block ' + this.focus}
+        className={classname}
         title="Double-click to edit"
         style={{cursor: 'default'}}
         onMouseDown={(event) => event.preventDefault()}

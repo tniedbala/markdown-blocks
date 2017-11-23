@@ -9,7 +9,7 @@ import marked from 'marked';
 marked.setOptions({ sanitize: true });
 
 // active block renders MarkdownBlock/Editor combination
-@connect(store => store)
+@connect((store) => store)
 export default class ActiveBlock extends React.Component {
   constructor(props) {
     super(props)
@@ -27,13 +27,18 @@ export default class ActiveBlock extends React.Component {
   }
 
   render() {
+    const { layout } = this.props,
+          classname = "row top-pad bottom-pad" + (layout.editmode ? '' : ' preview');
+
     return (
       <div 
         id="active" 
-        className="row top-pad bottom-pad"
+        className={classname}
         ref={(activeBlock) => this.activeBlock = activeBlock}
       >
+        <hr />
         <div id="activeblock-content" dangerouslySetInnerHTML={{ __html: marked(this.props.editor.content) }} />
+        <hr />
       </div>
     );
   }

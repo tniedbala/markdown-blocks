@@ -12,7 +12,7 @@ import { toggleEditMode } from '../actions/layoutActions';
 import SplitView from './SplitView';
 
 
-@connect(store => store)
+@connect((store) => store)
 class App extends React.Component {
   constructor(props) {
     super(props);
