@@ -10,6 +10,7 @@ const layout = {
 }
 
 export default function reducer(state=layout, action) {  
+  
   var newState = Object.assign({}, state);
   var { split } = newState;
   

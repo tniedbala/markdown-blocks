@@ -4,7 +4,7 @@ import marked from 'marked';
 import { connect } from 'react-redux';
 import { GlyphButton, GlyphDropdown } from './ItemControls';
 import { openSettings, downloadMarkdown, toggleEditMode } from '../actions/layoutActions';
-import { openFile } from '../actions/editorActions';
+import { openFile, editorChange } from '../actions/editorActions';
 
 
 // Nav menu items
@@ -36,7 +36,7 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);    
     this.menuOptions = [
-      { key: 1, title: 'About', glyph: 'info-sign', click: () => alert(JSON.stringify(this.props, null, 2)) }, // temporary - should open project page
+      { key: 1, title: 'About', glyph: 'info-sign', click: this.showState }, // temporary - should open project page
       { key: 2, title: 'Open', glyph: 'folder-open', click: this.openFileDialog }
     ]
     this.downloadOptions = [
@@ -44,6 +44,19 @@ class Nav extends React.Component {
       { key: 2, content: 'HTML', type: 'text/html', download: 'markdown.html', click: this.downloadMarkdown },
       { key: 3, content: 'JSON', type: 'text/json', download: 'markdown.json', click: this.downloadMarkdown }
     ]
+  }
+
+  // temporary - show app state in editor
+  showState = () => {
+    let quotes = '```';
+    let state = {
+      layout: this.props.layout,
+      editor: this.props.editor,
+      blockset: this.props.blockset
+    }
+    state.editor.content = '...';
+    let stateStr = `${quotes}\n${JSON.stringify(state, null, 2)}\n${quotes}`;
+    this.props.dispatch(editorChange(stateStr));
   }
   
   toggleEditMode = () => {    

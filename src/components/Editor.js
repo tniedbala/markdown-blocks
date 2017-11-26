@@ -70,10 +70,7 @@ class Editor extends React.Component {
           editorHeight = split.height * split.ratio - 50; // - 100; // - 165;
     
     return ( 
-      <div 
-        ref="editorPane"
-        id={this.props.id}
-        className={'test split split-vertical fade-' + (this.props.layout.editmode ? 'in' : 'out')}>   
+      <div id={this.props.id} className='split split-vertical'>   
         <div className="panel panel-default" style={{ border: 'none' }}>         
           <div className="panel-body">
             <AceEditor
@@ -100,13 +97,3 @@ class Editor extends React.Component {
 }
 
 export default Editor;
-
-
-/*
-          <div className="container btn-group" role="group" aria-label="...">
-            <button type="button" className="btn btn-primary" onClick={this.publishBlock}>Publish</button>
-            <button type="button" className="btn btn-default" onClick={this.clearEditor}>Clear</button>
-            <button type="button" className="btn btn-default" onClick={this.cancelBlock}>Cancel</button>
-          </div>
-
-*/

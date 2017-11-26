@@ -7,75 +7,85 @@ import { editorChange, openFile, setHeight } from '../actions/editorActions';
 import { moveBlock, publishBlock, followBlock, cancelBlock } from '../actions/blockActions';
 
 
-@connect(store => store)
-class EditorHeading extends React.Component {
+class FooterBtn extends React.Component {
+
   constructor(props) {
     super(props);
-    this.controls = [
-      { key: 1, title: 'Collapse', glyph: 'menu-down', click: this.toggleEditor },
-      { key: 2, title: 'Down', glyph: 'arrow-down', click: () => this.moveBlock(false) },
-      { key: 3, title: 'Up', glyph: 'arrow-up', click: () => this.moveBlock(true) }
-    ]
   }
 
-  toggleEditor = () => this.props.dispatch(toggleEditor());
-  moveBlock = (moveUp) => this.props.dispatch(moveBlock('active', moveUp));
-  
   render() {
-    return(
-      <div id="editorHeading" className="panel-heading">
-        {
-          this.controls.map(controls => {
-            controls.className = 'pull-right edit-options';
-            return <Glyphicon { ...controls} />
-          })
-        }
-        <span>Markdown</span>
-      </div>
+    const { layout } = this.props;
+    return (
+      <button
+        type="button"
+        key={this.props.key}
+        className={`btn btn-${this.props.btnStyle}`}
+        onClick={this.props.click}
+      >
+        {this.props.text}
+      </button>
     )
   }
 }
 
 
-@connect(store => store)
+@connect((store) => store)
 export default class Footer extends React.Component {
+  
   constructor(props) {
-    super(props);
+    super(props);  
+
+    this.buttons = [
+      { key: 1, text: 'Publish', btnStyle: 'primary', click: this.publishBlock },
+      { key: 2, text: 'Clear', btnStyle: 'default', click: this.clearEditor },
+      { key: 3, text: 'Collapse', btnStyle: 'default', click: this.cancelBlock }
+    ]
+
+    let classname = 'pull-right edit-options';
     this.controls = [
-      { key: 1, title: 'Collapse', glyph: 'menu-down', click: this.toggleEditor },
-      { key: 2, title: 'Down', glyph: 'arrow-down', click: () => this.moveBlock(false) },
-      { key: 3, title: 'Up', glyph: 'arrow-up', click: () => this.moveBlock(true) }
+      { key: 1, title: 'Collapse', className: classname, glyph: 'menu-down', click: this.toggleEditor },
+      { key: 2, title: 'Down', className: classname, glyph: 'arrow-down', click: () => this.moveBlock(false) },
+      { key: 3, title: 'Up', className: classname, glyph: 'arrow-up', click: () => this.moveBlock(true) }
     ]
   }
 
-  toggleEditor = () => this.props.dispatch(toggleEditor());
   moveBlock = (moveUp) => this.props.dispatch(moveBlock('active', moveUp));
   setValue = (newValue) => this.refs.aceEditor.editor.setValue(newValue);
   cancelBlock = () => this.props.dispatch(cancelBlock());
   clearEditor = () => this.setValue(''); 
   editorChange = (content) => this.props.dispatch(editorChange(content));
+
+  // expand/collapse editor
+  toggleEditor = () => {
+    this.props.dispatch(toggleEditor());
+    setTimeout(() => this.props.dispatch(toggleEditor()), 600);
+  }
   
   publishBlock = () => {
     if(this.props.editor.content.trim() === '') {
       return;
     }
     this.props.dispatch(publishBlock(this.props.editor.content));
+
   }
 
   render() {
+
+    const { layout } = this.props,
+          { split } = layout,
+          preview = layout.editmode ? '' : ' preview',
+          collapsed = split.collapse ? 'collapsed' : '';
+
     return(
-      <footer className="footer">
-        <div style={{ paddingTop: '15px', paddingLeft: '15px', float: 'left' }}>
-          <button type="button" className="btn btn-primary" onClick={this.publishBlock}>Publish</button>
-          <button type="button" className="btn btn-default" onClick={this.clearEditor}>Clear</button>
-          <button type="button" className="btn btn-default" onClick={this.cancelBlock}>Cancel</button>
-        </div>
-        <div style={{ paddingTop: '15px', paddingRight: '15px', float:'right' }}>
+      <footer className={`footer ${preview} ${collapsed}`}>
+        <div className="footer-controls" style={{ paddingTop: '15px', paddingLeft: '15px', float: 'left' }}>
         {
-          this.controls.map(controls => {
-            controls.className = 'pull-right edit-options';
-            return <Glyphicon { ...controls} />
-          })
+          this.buttons.map((button) => <FooterBtn { ...button} />)
+        }
+        </div>
+        <div className="footer-controls" style={{ paddingTop: '15px', paddingRight: '15px', float:'right' }}>
+        {
+          this.controls.map((control) => <Glyphicon { ...control} />)
         }
         </div>
       </footer>

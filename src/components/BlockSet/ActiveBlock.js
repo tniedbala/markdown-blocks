@@ -11,22 +11,13 @@ marked.setOptions({ sanitize: true });
 // active block renders MarkdownBlock/Editor combination
 @connect((store) => store)
 export default class ActiveBlock extends React.Component {
+  
   constructor(props) {
     super(props)
   }
 
-  // follow active block if no other block is followed
-  componentDidUpdate() {
-    let { layout, blockset } = this.props,
-        { editmode, collapse } = layout,
-        noFollow = blockset.every((block) => !block.follow);
-
-    if(noFollow && editmode && !collapse) {
-      this.props.dispatch(followBlock('active'));
-    }
-  }
-
   render() {
+
     const { layout } = this.props,
           classname = "row top-pad bottom-pad" + (layout.editmode ? '' : ' preview');
 

@@ -52,6 +52,7 @@ export default class SplitView extends React.Component {
   }
 
   render() {
+    
     const { layout } = this.props,
           { editmode, split } = layout,
           edit = editmode && !split.collapse,

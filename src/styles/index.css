@@ -9,7 +9,7 @@ body {
 }
 
 /* ---------------------------------- */
-/* misc nav */
+/* misc nav items */
 
 a:hover {
   cursor: pointer;
@@ -51,6 +51,14 @@ input[type='file'] {
   border: none;
   outline: none;
   box-shadow: none;
+}
+
+.markdown-block .block-content {
+  transition: all 0.2s ease-in-out;
+}
+
+.markdown-block form {
+  transition: height 0.2s ease-in-out;
 }
 
 .markdown-block .divider-gradient {
@@ -112,16 +120,37 @@ hr.divider-gradient {
   box-shadow: none !important;
 }
 
-.markdown-block.preview div {
+.markdown-block.preview .block-content {
   padding-top: 0px;
   padding-bottom: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
+.markdown-block.preview form {
+  height: 0;
+}
+
 .preview form, .preview hr {
   display: none;
 }
+
+footer {
+  opacity: 1;
+  transition: opacity 0.2s fade-in-out;
+}
+
+footer.preview {
+  opacity: 0;
+}
+
+/* footer .footer-controls {
+  opacity: 1;
+}
+
+footer.preview .footer-controls {
+  opacity: 0;
+} */
 
 /* ---------------------------------- */
 /* edit slider */
@@ -266,4 +295,17 @@ footer {
   bottom: 0px;
   border-top: 1px solid #ccc;
   background-color: white !important;
+}
+
+footer button {
+  margin-right: 2px;
+}
+
+/* toggle expand/collapse icon */
+footer .glyphicon-menu-down {
+  transition: .4s linear;
+}
+
+footer.collapsed .glyphicon-menu-down {
+  transform: rotate(180deg);
 }

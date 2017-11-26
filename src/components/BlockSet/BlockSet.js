@@ -25,12 +25,12 @@ export default class BlockSet extends React.Component {
 
   // scroll to layout.follow on update
   componentDidUpdate() {
-    // prevent scrolling on SplitView resize (avoid jerky motions)
+    // prevent scrolling on SplitView resize (avoids jerky motions)
     const { layout } = this.props;
     
     if(!layout.split.resize && this.follow) {
       this.follow.scrollIntoView({
-        block: 'start',
+        block: (layout.follow === 'active' ? 'end' : 'start'),
         inline: 'nearest',
         behavior: 'smooth'
       });
@@ -44,33 +44,15 @@ export default class BlockSet extends React.Component {
     return [{ id: Date.now(), content: content }];
   }
 
-  // temporary - render app state in first block
-  showState = () => {
-    let quotes = '```';
-    let appState = {
-      layout: this.props.layout,
-      editor: this.props.editor,
-      blockset: this.props.blockset
-    }
-    appState.blockset[0].content = '{ ...state }';    
-    return  `${quotes}n${JSON.stringify(appState, null, 4)}\n${quotes}`;
-  }
-
   render() {
     // render composite block when editmode == false
     const { layout, blockset } = this.props;
-    //const blockset = this.props.layout.editmode ? this.props.blockset : this.compositeBlock();
     let i = 0;
 
     return (      
       <div id="blockset" className="container" role="main">
         {
             blockset.map((block) => {
-              // -----------------------------------------------------------------------         
-              // temporary - render app state in first block
-              if(i === 0 && this.props.layout.editmode) { block.content = this.showState(); }
-              i++;
-              // -----------------------------------------------------------------------
               if(block.id === layout.follow) {
                 return (
                   <div ref={follow => this.follow = follow}>

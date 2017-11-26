@@ -5,6 +5,7 @@ const editor = {
 }
 
 export default function reducer(state=editor, action) {  
+  
   var newState = Object.assign({}, state);
   
   switch(action.type) {
