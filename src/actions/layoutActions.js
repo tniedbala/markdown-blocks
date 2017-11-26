@@ -44,3 +44,10 @@ export function follow(anchor) {
     anchor
   }
 }
+
+export function scrollBlock(scroll) {
+  return {
+    type: 'SCROLL_BLOCK',
+    scroll
+  }
+}

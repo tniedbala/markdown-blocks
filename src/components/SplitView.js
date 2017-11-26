@@ -1,19 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { movePartition, toggleResize } from '../actions/layoutActions';
 
 
 @connect((store) => store)
 export default class SplitView extends React.Component {
+
   constructor(props) {
     super(props);
   }
 
-  // set 50-50 split ratio on component mount
+  // set 60-40 split ratio on component mount
   componentDidMount() {
     let initialHeight = this.splitPane.clientHeight;
-    this.props.dispatch(movePartition(initialHeight, 0.5));
+    this.props.dispatch(movePartition(initialHeight, 0.4));
     window.addEventListener('resize', this.windowResize);
   }
 
@@ -26,6 +26,7 @@ export default class SplitView extends React.Component {
   
   // calculate height change using mouse coordinates
   handleDrag = (event) => {
+
     this.props.dispatch(toggleResize(true));
     
     // keep from highlighting text while resizing
@@ -56,14 +57,18 @@ export default class SplitView extends React.Component {
     const { layout } = this.props,
           { editmode, split } = layout,
           edit = editmode && !split.collapse,
-          lowerFlex = split.ratio / (1 - split.ratio),
+          lowerFlex = split.ratio / (1 - split.ratio),          
+          splitStyle = {
+            height: `calc(100vh - ${editmode ? 110 : 50}px)`,
+            transition: '0.6s'
+          },
           lowerStyle = {
             flex: edit ? lowerFlex : 0,
-            transition: edit ? '0s' : '0.6s'
+            transition: split.resize ? '0s' : '0.4s'
           }
 
     return (
-        <div id="split-pane" ref={splitPane => this.splitPane = splitPane}>
+        <div id="split-pane" style={splitStyle} ref={splitPane => this.splitPane = splitPane}>
           <div id="top-pane" style={{ flex: 1 }}>  
             { this.props.children[0] }
           </div>

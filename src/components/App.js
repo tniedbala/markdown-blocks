@@ -1,22 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import marked from 'marked';
 import Nav from './Nav';
 import BlockSet from './BlockSet/BlockSet';
 import Editor from './Editor';
-import ExpandButton from './ExpandButton';
 import Footer from './Footer';
-import { resizeEditor, toggleEditor } from '../actions/editorActions';
-import { toggleEditMode } from '../actions/layoutActions';
+import { resizeEditor } from '../actions/editorActions';
+import { toggleEditMode, toggleEditor, scrollBlock } from '../actions/layoutActions';
 import SplitView from './SplitView';
 
 
 @connect((store) => store)
 class App extends React.Component {
+  
   constructor(props) {
     super(props);
     this.resizeInteval = null;
+  }
+
+  // expand/collapse editor
+  toggleEditor = () => {
+    const { layout } = this.props;
+    this.props.dispatch(scrollBlock(false));
+    this.props.dispatch(toggleEditor());
+
+    // scroll to block after expanding editor
+    setTimeout(() => this.props.dispatch(scrollBlock(true)), 400);
   }
 
   render() {
@@ -36,7 +45,7 @@ class App extends React.Component {
             />
             <Editor id="editorContainer"/> 
           </SplitView>
-          <Footer />
+          <Footer toggleEditor={this.toggleEditor} />
       </div>
     )
   }

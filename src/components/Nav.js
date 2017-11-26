@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import marked from 'marked';
 import { connect } from 'react-redux';
 import { GlyphButton, GlyphDropdown } from './ItemControls';
@@ -36,7 +35,7 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);    
     this.menuOptions = [
-      { key: 1, title: 'About', glyph: 'info-sign', click: this.showState }, // temporary - should open project page
+      { key: 1, title: 'About', glyph: 'info-sign', click: () => alert('info-btn') }, // temporary - should open project page
       { key: 2, title: 'Open', glyph: 'folder-open', click: this.openFileDialog }
     ]
     this.downloadOptions = [
@@ -46,25 +45,9 @@ class Nav extends React.Component {
     ]
   }
 
-  // temporary - show app state in editor
-  showState = () => {
-    let quotes = '```';
-    let state = {
-      layout: this.props.layout,
-      editor: this.props.editor,
-      blockset: this.props.blockset
-    }
-    state.editor.content = '...';
-    let stateStr = `${quotes}\n${JSON.stringify(state, null, 2)}\n${quotes}`;
-    this.props.dispatch(editorChange(stateStr));
-  }
-  
   toggleEditMode = () => {    
-    //this.props.toggleEditor(this.props.layout.editmode);
     this.props.dispatch(toggleEditMode());
-    // if(this.props.editmode) {
-    //   this.props.dispatch(followBlock('active'));
-    // }
+    this.props.toggleEditor();
   }
   
   openFile = (event) => {

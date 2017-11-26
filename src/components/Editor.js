@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import 'brace/mode/markdown';
@@ -14,6 +13,7 @@ import { moveBlock, publishBlock, followBlock, cancelBlock } from '../actions/bl
 // editor glyphicon buttons
 @connect((store) => store)
 class EditorHeading extends React.Component {
+  
   constructor(props) {
     super(props);
     this.controls = [
@@ -45,29 +45,49 @@ class EditorHeading extends React.Component {
 // Ace editor
 @connect(store => store)
 class Editor extends React.Component {  
+
   constructor(props) {
     super(props);
   }
+
+  // temporary - show app state in editor
+  showState() {
+    let quotes = '```';
+    let state = {
+      layout: this.props.layout,
+      editor: this.props.editor,
+      blockset: this.props.blockset
+    }
+    state.editor.content = '...';
+    return `${quotes}\n${JSON.stringify(state, null, 2)}\n${quotes}`;
+  }
+
   followActive = () => this.props.dispatch(follow('active'));
   setValue = (newValue) => this.refs.aceEditor.editor.setValue(newValue);
   cancelBlock = () => this.props.dispatch(cancelBlock());
   clearEditor = () => this.setValue(''); 
+  
   editorChange = (content) => {
     this.props.dispatch(editorChange(content));
-    this.followActive();    
+    this.followActive();
   }
   
   publishBlock = () => {
-    if(this.props.editor.content.trim() === '') {
+    const { editor } = this.props,
+          content = editor.content.trim();
+
+    if(content === '') {
       return;
     }
-    this.props.dispatch(publishBlock(this.props.editor.content));    
+    this.props.dispatch(publishBlock(content));
     this.followActive();
   }
 
   render() {
-    const split = this.props.layout.split,
-          editorHeight = split.height * split.ratio - 50; // - 100; // - 165;
+
+    const { layout, editor } = this.props,
+          { split } = layout,
+          editorHeight = split.height * split.ratio - 50;
     
     return ( 
       <div id={this.props.id} className='split split-vertical'>   
@@ -86,7 +106,7 @@ class Editor extends React.Component {
               highlightActiveLine={false}
               showGutter={false}
               editorProps={{$blockScrolling: true}}
-              value={this.props.editor.content}  
+              value={ /* this.showState() */ editor.content }  
               onChange={this.editorChange} 
             />
           </div>

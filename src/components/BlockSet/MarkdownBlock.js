@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactDOM, findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import marked from 'marked';
 import { Glyphicon, GlyphButton } from '../ItemControls';
@@ -12,6 +11,7 @@ marked.setOptions({ sanitize: true });
 // glyphicon buttons visible on hover
 @connect((store) => store)
 class BlockControl extends React.Component {
+  
   constructor(props) {
     super(props);
     this.controls = [
@@ -58,6 +58,7 @@ class BlockControl extends React.Component {
 // container for rendered markdown block
 @connect((store) => store)
 export default class MarkdownBlock extends React.Component {
+  
   constructor(props) { 
     super(props);
   }
@@ -88,7 +89,9 @@ export default class MarkdownBlock extends React.Component {
 
   // TODO - add settings option to toggle .markdown-block cursor style & text selection
   render() {  
+
     const { block, layout }= this.props,
+          { editmode } = layout,
           classname = 'row markdown-block' + (layout.editmode ? '' : ' preview');
     
     return (
@@ -96,8 +99,8 @@ export default class MarkdownBlock extends React.Component {
         id={block.id}
         className={classname}
         title="Double-click to edit"
-        style={{cursor: 'default'}}
-        onMouseDown={(event) => event.preventDefault()}
+        style={{ cursor: (editmode ? 'default' : 'auto') }}
+        onMouseDown={(event) => editmode ? event.preventDefault() : null }
         onDoubleClick={this.handleDoubleClick}        
       >
         <hr className="divider-gradient"/>

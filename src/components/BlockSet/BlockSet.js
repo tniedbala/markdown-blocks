@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactDOM, findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { Glyphicon, GlyphButton } from '../ItemControls';
 import ActiveBlock from './ActiveBlock';
@@ -19,6 +18,7 @@ const Block = (props) => {
 // container for all blocks
 @connect((store) => store)
 export default class BlockSet extends React.Component {
+  
   constructor(props) {
     super(props);
   }
@@ -26,9 +26,11 @@ export default class BlockSet extends React.Component {
   // scroll to layout.follow on update
   componentDidUpdate() {
     // prevent scrolling on SplitView resize (avoids jerky motions)
-    const { layout } = this.props;
+    const { layout } = this.props,
+          { editmode, split } = layout;
     
-    if(!layout.split.resize && this.follow) {
+    //if(!split.resize && this.follow) {
+    if(!split.resize && layout.scroll) {
       this.follow.scrollIntoView({
         block: (layout.follow === 'active' ? 'end' : 'start'),
         inline: 'nearest',

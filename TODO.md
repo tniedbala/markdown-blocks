@@ -4,26 +4,20 @@
 #### Configuration
 - Minimize webpack bundle size
 
-#### Layout
-- Fix jerky movements on split-view resize
-- Keep from scrolling to active block on split-view resize
-
 #### Nav Controls
+- Fix nav layout on narrow page width
+- Review download functionality
 - Create project info page (consider adding react-router)
 - Update download-html functionality to wrap rendered markdown within html/body template
 
 #### Block Controls
 - Include add-button functionality
-- Add setting to toggle text selection in rendered markdown (currently prevents default cursor selection to improve edit on block double-click)
+- Consider adding setting to disable app scrolling
 
 #### Editor Controls
-- Add expand button, consider adding fixed footer
 - Add keyboard shortcut for publish command
+- Fix clear/cancel button functionality
 
 #### Styling
-- Hide block shadow on hover when edit mode is turned off
-- Improve active block borders
-- Adjust expand button positon
-- Improve block spacing, make room for block control icons on hover
+- Fix active block spacing - align with markdown-block components
 - Add github-styling to rendered markdown components
-- Clean up ```./src/styles/index.css```

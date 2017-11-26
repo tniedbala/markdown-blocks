@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactDOM, findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { followBlock } from '../../actions/blockActions';
 import { follow } from '../../actions/layoutActions';
@@ -19,7 +18,8 @@ export default class ActiveBlock extends React.Component {
   render() {
 
     const { layout } = this.props,
-          classname = "row top-pad bottom-pad" + (layout.editmode ? '' : ' preview');
+          { editmode } = layout,
+          classname = "row top-pad bottom-pad" + (editmode ? '' : ' preview');
 
     return (
       <div 
@@ -28,7 +28,11 @@ export default class ActiveBlock extends React.Component {
         ref={(activeBlock) => this.activeBlock = activeBlock}
       >
         <hr />
-        <div id="activeblock-content" dangerouslySetInnerHTML={{ __html: marked(this.props.editor.content) }} />
+        <div 
+          id="activeblock-content"
+          style={{ cursor: (editmode ? 'default' : 'auto') }}
+          onMouseDown={(event) => editmode ? event.preventDefault() : null }
+          dangerouslySetInnerHTML={{ __html: marked(this.props.editor.content) }} />
         <hr />
       </div>
     );

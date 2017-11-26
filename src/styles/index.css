@@ -114,45 +114,6 @@ hr.divider-gradient {
 }
 
 /* ---------------------------------- */
-/* preview mode */
-
-.markdown-block.preview  {
-  box-shadow: none !important;
-}
-
-.markdown-block.preview .block-content {
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.markdown-block.preview form {
-  height: 0;
-}
-
-.preview form, .preview hr {
-  display: none;
-}
-
-footer {
-  opacity: 1;
-  transition: opacity 0.2s fade-in-out;
-}
-
-footer.preview {
-  opacity: 0;
-}
-
-/* footer .footer-controls {
-  opacity: 1;
-}
-
-footer.preview .footer-controls {
-  opacity: 0;
-} */
-
-/* ---------------------------------- */
 /* edit slider */
 
 /* box around the slider */
@@ -295,6 +256,7 @@ footer {
   bottom: 0px;
   border-top: 1px solid #ccc;
   background-color: white !important;
+  z-index: 100;
 }
 
 footer button {
@@ -308,4 +270,35 @@ footer .glyphicon-menu-down {
 
 footer.collapsed .glyphicon-menu-down {
   transform: rotate(180deg);
+}
+
+/* ---------------------------------- */
+/* preview mode */
+
+.markdown-block.preview  {
+  box-shadow: none !important;
+}
+
+.markdown-block.preview .block-content {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.markdown-block.preview form {
+  height: 0;
+}
+
+.preview form, .preview hr {
+  display: none;
+}
+
+footer {
+  opacity: 1;
+  transition: height 0.4s fade-in-out;
+}
+
+footer.preview {
+  height: 0px;
 }

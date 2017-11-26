@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Glyphicon } from './ItemControls';
-import { toggleEditor } from '../actions/layoutActions';
+import { toggleEditor, scrollBlock } from '../actions/layoutActions';
 import { editorChange, openFile, setHeight } from '../actions/editorActions';
 import { moveBlock, publishBlock, followBlock, cancelBlock } from '../actions/blockActions';
 
@@ -43,7 +42,7 @@ export default class Footer extends React.Component {
 
     let classname = 'pull-right edit-options';
     this.controls = [
-      { key: 1, title: 'Collapse', className: classname, glyph: 'menu-down', click: this.toggleEditor },
+      { key: 1, title: 'Collapse', className: classname, glyph: 'menu-down', click: props.toggleEditor },
       { key: 2, title: 'Down', className: classname, glyph: 'arrow-down', click: () => this.moveBlock(false) },
       { key: 3, title: 'Up', className: classname, glyph: 'arrow-up', click: () => this.moveBlock(true) }
     ]
@@ -55,18 +54,23 @@ export default class Footer extends React.Component {
   clearEditor = () => this.setValue(''); 
   editorChange = (content) => this.props.dispatch(editorChange(content));
 
-  // expand/collapse editor
-  toggleEditor = () => {
-    this.props.dispatch(toggleEditor());
-    setTimeout(() => this.props.dispatch(toggleEditor()), 600);
-  }
+  // // expand/collapse editor
+  // toggleEditor = () => {
+  //   const { layout } = this.props;
+  //   this.props.dispatch(scrollBlock(false));
+  //   this.props.dispatch(toggleEditor());
+
+  //   // scroll to block after expanding editor
+  //   if(!layout.scroll) {
+  //     setTimeout(() => this.props.dispatch(scrollBlock(true)), 500); 
+  //   }
+  // }
   
   publishBlock = () => {
     if(this.props.editor.content.trim() === '') {
       return;
     }
     this.props.dispatch(publishBlock(this.props.editor.content));
-
   }
 
   render() {

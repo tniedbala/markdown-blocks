@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
-import layout from './reducers/layoutReducer';
-import blockset from './reducers/blockReducer';
-import editor from './reducers/editorReducer';
+import layout from './layoutReducer';
+import blockset from './blockReducer';
+import editor from './editorReducer';
 
 const reducer = combineReducers({ layout, editor, blockset });
 export default createStore(reducer)

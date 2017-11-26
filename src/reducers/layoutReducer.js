@@ -1,6 +1,7 @@
 const layout = {
   editmode: true,
-  follow: 'active',  
+  follow: 'active',
+  scroll: true,
   split: {
     collapse: false,
     resize: false,
@@ -45,6 +46,14 @@ export default function reducer(state=layout, action) {
       split.height = height;
       split.ratio = ratio;
       newState.split = split;
+      return newState;
+    
+    case 'MOVE_BLOCK':
+      newState.follow = action.id;
+      return newState;      
+
+    case 'SCROLL_BLOCK':
+      newState.scroll = action.scroll;
       return newState;
 
     default:
